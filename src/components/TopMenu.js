@@ -7,7 +7,7 @@ import {
   Nav,
   NavItem
 } from "reactstrap";
-
+import { CartContext } from "../contexts/Cart";
 import StyleLink from "../components/StyleLink";
 
 export default function TopMenu(props) {
@@ -26,8 +26,15 @@ export default function TopMenu(props) {
             <NavItem style={{ marginRight: "2rem" }}>
               <StyleLink to="/">Home</StyleLink>
             </NavItem>
+            <NavItem style={{ marginRight: "2rem" }}>
+              <StyleLink to="/products/">Products</StyleLink>
+            </NavItem>
             <NavItem>
-              <StyleLink to="/products">Products</StyleLink>
+              <CartContext.Consumer>
+                {({ cartItems }) => (
+                  <StyleLink to="/carts">Cart({cartItems.length})</StyleLink>
+                )}
+              </CartContext.Consumer>
             </NavItem>
           </Nav>
         </Collapse>
